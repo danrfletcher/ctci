@@ -12,13 +12,7 @@
 const characters = Map();
 
 const isUnique = (string) => {
-	for (char in string) {
-		characters.has(char) ? 
-		return false : 
-		characters.set(char.toString(), {
-			count: 1	
-		})
-	};
+    string.forEach(char => characters.has(char) ? false : characters.set(char.toString(), {count: 1}));
 	return true;
 }
 
