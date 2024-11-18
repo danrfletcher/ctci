@@ -6,32 +6,28 @@
 
 /**
  * --- SOLUTION ---
- * Initial solution will be a brute force solution to check if one string is a permutation of another by calculating all permutations
- * 1. Calculate all permutations of 1st string
- * 2. Check if 2nd string is in array of permutations of 1st
- * string 1 is abc
- * permutations are:
- * abc
- * bac
- * cba
- * iterate through the string, lock each character in turn, calculate permutations using the rest of the letters in the string
+ * Try to build string 2 from 1.
  */
 
-const checkPermutation = (string1, string2, charIndex = 0, permutations) => {
-  let base = false;
-  if (charIndex === string1.length - 1) base = true;
-  if (base === false) {
-    string1.split('').forEach((char, index) => {})
-  } else {
-
+const checkPermutation = (string1, string2) => {
+  if (string1.length != string2.length) return false;
+  for (let i = 0; i < string1.length; i++) {
+    for (let j = 0; j < string2.length; j++) {
+      if (string1[i] === string2[j]) {
+        string2 = string2.substring(0,j) + string2.substring(j+1,string2.length);
+        if(string2.length === 0) return true
+      }
+    }
   }
-
-};
+  return false;
+}
 
 
 /* --- TEST CASES --- */
-
-
+console.log(checkPermutation("abc", "cab")) //true
+console.log(checkPermutation("abcd", "abce")) //false
+ 
 /**
  * --- EXPLANATION ---
+ * Using the nested for loop avoids the need to calculate all possible permutations which would have time complexity of O((N^2)(N!)), we reduce time complexity to O(N^2)
  */
