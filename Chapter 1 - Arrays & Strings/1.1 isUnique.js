@@ -1,6 +1,6 @@
 /**
  * --- PROBLEM DESCRIPTION ---
- * Is Unique: Implement an algorithm to determine if a string has all unique characters. What if you cannot use additional data structures? 
+ * 1.1. Is Unique: Implement an algorithm to determine if a string has all unique characters. What if you cannot use additional data structures?
  */
 /*
 
@@ -10,9 +10,12 @@
  */
 
 const isUnique = (string) => {
-    const characters = Map();
-    return string.forEach(char => characters.has(char) ? false : characters.set(char, true)) || true;
-}
+  const characters = new Map();
+  for (let char of string) {
+    characters.has(char) ? false : characters.set(char, true);
+  }
+  return true;
+};
 
 /**
  * --- EXPLANATION ---
@@ -25,9 +28,11 @@ const isUnique = (string) => {
  * Without using additional data structures.
  */
 
-const isUniqueNoExtraData = (string) => {
-    const characters = Map();
-    return string.forEach(charPointer1 => string.forEach((charPointer2) => {
-        if (charPointer1 === charPointer2) return true;
-    })) || true;
-}
+const isUniqueNoExtras = (string) => {
+  for (let char of string) {
+    for (let innerChar of string) {
+      if (char === innerChar) false;
+    }
+  }
+  return true;
+};
