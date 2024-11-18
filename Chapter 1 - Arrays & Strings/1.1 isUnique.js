@@ -10,12 +10,22 @@
  */
 
 const isUnique = (string) => {
+  if (!string) return false;
   const characters = new Map();
+
   for (let char of string) {
-    characters.has(char) ? false : characters.set(char, true);
+    if (characters.has(char)) {
+      return false;
+    }
+    characters.set(char, true);
   }
   return true;
 };
+
+/* --- TEST CASES --- */
+console.log(isUnique("abcde"));     // true
+console.log(isUnique("abcda"));     // false
+
 
 /**
  * --- EXPLANATION ---
@@ -29,10 +39,18 @@ const isUnique = (string) => {
  */
 
 const isUniqueNoExtras = (string) => {
-  for (let char of string) {
-    for (let innerChar of string) {
-      if (char === innerChar) false;
+  if (!string) return false;
+
+  for (let i = 0; i < string.length; i++) {
+    for (let j = i + 1; j < string.length; j++) {
+      if (string[i] === string[j]) {
+        return false;
+      }
     }
   }
   return true;
 };
+
+/* --- TEST CASES --- */
+console.log(isUniqueNoExtras("abcde")); // true
+console.log(isUniqueNoExtras("abcda")); // false
